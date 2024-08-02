@@ -1,0 +1,44 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h2>Scan Barcode</h2>
+<div id="scanner-container">
+    <video id="video" width="300" height="200"></video>
+</div>
+<div id="scan-result"></div>
+<form id="manual-entry-form" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" id="username-input" placeholder="Enter username manually">
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#video')
+            },
+            decoder: {
+                readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader"]
+            }
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log("Quagga initialization finished. Ready to start");
+            Quagga.start();
+        });
+
+        Quagga.onDetected(function(result) {
+            var code = result.codeResult.code;
+            document.querySelector('#username-input').value = code;
+            document.querySelector('#manual-entry-form').submit();
+        });
+    });
+</script>
+{% endblock %}

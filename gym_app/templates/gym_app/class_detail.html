@@ -1,0 +1,23 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h1>{{ gym_class.name }}</h1>
+<p>Instructor: {{ gym_class.instructor }}</p>
+<p>Description: {{ gym_class.description }}</p>
+<p>Start Time: {{ gym_class.start_time }}</p>
+<p>End Time: {{ gym_class.end_time }}</p>
+<p>Max Capacity: {{ gym_class.max_capacity }}</p>
+
+<h2>Attendees</h2>
+<ul>
+    {% for attendance in attendees %}
+    <li>{{ attendance.member.name }}</li>
+    {% empty %}
+    <li>No attendees yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'class_update' gym_class.pk %}">Edit Class</a>
+<a href="{% url 'class_register' gym_class.pk %}">Register for Class</a>
+<a href="{% url 'class_list' %}">Back to Class List</a>
+{% endblock %}

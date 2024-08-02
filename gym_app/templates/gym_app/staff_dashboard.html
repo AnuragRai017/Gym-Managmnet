@@ -1,0 +1,57 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h1>Staff Dashboard</h1>
+
+<h2>Upcoming Classes</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Instructor</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for class in classes %}
+        <tr>
+            <td>{{ class.name }}</td>
+            <td>{{ class.instructor }}</td>
+            <td>{{ class.start_time }}</td>
+            <td>{{ class.end_time }}</td>
+            <td>
+                <a href="{% url 'class_detail' class.pk %}">View</a>
+                <a href="{% url 'class_update' class.pk %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Members</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Membership Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.user.get_full_name }}</td>
+            <td>{{ member.user.email }}</td>
+            <td>{{ member.membership_type }}</td>
+            <td>
+                <a href="{% url 'member_detail' member.pk %}">View</a>
+                <a href="{% url 'member_update' member.pk %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

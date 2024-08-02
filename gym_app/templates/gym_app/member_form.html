@@ -1,0 +1,15 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h2>{% if member %}Edit{% else %}Add{% endif %} Member</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+
+<h3>Debugging Info:</h3>
+<p>Form enctype: {{ form.is_multipart }}</p>
+<p>Profile Picture Field: {{ form.profile_picture }}</p>
+
+{% endblock %}

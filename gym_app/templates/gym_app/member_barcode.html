@@ -1,0 +1,7 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h2>{{ member.user.get_full_name }}'s Barcode</h2>
+<img src="{{ member.barcode.url }}" alt="Member Barcode">
+<p>Username: {{ member.user.username }}</p>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h2>Pay Invoice</h2>
+<p>Invoice ID: {{ invoice.id }}</p>
+<p>Amount Due: ${{ invoice.amount }}</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Payment</button>
+</form>
+{% endblock %}

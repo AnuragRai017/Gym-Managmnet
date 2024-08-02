@@ -1,0 +1,64 @@
+{% extends "gym_app/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="member-card">
+                <div class="main">
+                    {% if member.profile_picture %}
+                        <img class="memberImage" src="{{ member.profile_picture.url }}" alt="{{ member.name }}">
+                    {% else %}
+                        <img class="memberImage" src="{% static 'img/default_avatar.png' %}" alt="Default Avatar">
+                    {% endif %}
+                    <h2>{{ member.name }}</h2>
+                    <p class="description">Member since {{ member.join_date }}</p>
+                    <div class="memberInfo">
+                        <div class="info">
+                            <i class="fas fa-dumbbell"></i>
+                            <p>{{ member.membership_plan.name }}</p>
+                        </div>
+                        <div class="info">
+                            <i class="fas fa-calendar-alt"></i>
+                            <p>{{ member.membership_end_date|date:"d M Y" }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="memberInfo">
+                        <div class="info">
+                            <i class="fas fa-phone"></i>
+                            <p>{{ member.phone_number }}</p>
+                        </div>
+                        <div class="info">
+                            <i class="fas fa-envelope"></i>
+                            <p>{{ member.email|default:"N/A" }}</p>
+                        </div>
+                    </div>
+                    <p class="description">{{ member.address }}</p>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-center">
+                <a href="{% url 'member_update' member.id %}" class="btn btn-primary">Edit Member</a>
+                <a href="{% url 'member_list' %}" class="btn btn-secondary">Back to Member List</a>
+                <a href="{% url 'generate_invoice' member.id %}" class="btn btn-success">Generate Invoice</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Debugging Information (hidden in production) -->
+{% if debug %}
+<div class="mt-4">
+    <h4>Debugging Information:</h4>
+    <p>Member ID: {{ member.id }}</p>
+    <p>Has profile picture: {% if member.profile_picture %}Yes{% else %}No{% endif %}</p>
+    {% if member.profile_picture %}
+        <p>Profile picture path: {{ member.profile_picture.path }}</p>
+        <p>Profile picture URL: {{ member.profile_picture.url }}</p>
+        <p>Profile picture name: {{ member.profile_picture.name }}</p>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

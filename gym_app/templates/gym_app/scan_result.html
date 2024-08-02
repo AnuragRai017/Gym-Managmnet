@@ -1,0 +1,10 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h2>Scan Barcode</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username" autofocus>
+    <button type="submit">Scan</button>
+</form>
+{% endblock %}

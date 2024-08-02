@@ -1,0 +1,17 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h1>Generate Invoice for {{ member.name }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="membership_plan">Select Membership Plan:</label>
+        <select name="membership_plan" id="membership_plan" class="form-control">
+            {% for plan in plans %}
+            <option value="{{ plan.id }}">{{ plan.name }} - ${{ plan.price }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Generate Invoice</button>
+</form>
+{% endblock %}

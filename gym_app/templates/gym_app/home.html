@@ -1,0 +1,96 @@
+{% extends "gym_app/base.html" %}
+
+{% block title %}Dashboard - Gym Management System{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Dashboard</h1>
+
+<div class="ag-format-container">
+    <div class="ag-courses_box">
+        <div class="ag-courses_item">
+            <a href="{% url 'member_list' %}" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                    Total Members
+                </div>
+                <div class="ag-courses-item_date-box">
+                    Count:
+                    <span class="ag-courses-item_date">
+                        {{ member_count }}
+                    </span>
+                </div>
+            </a>
+        </div>
+        <div class="ag-courses_item">
+            <a href="{% url 'class_list' %}" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                    Active Classes
+                </div>
+                <div class="ag-courses-item_date-box">
+                    Count:
+                    <span class="ag-courses-item_date">
+                        {{ active_classes }}
+                    </span>
+                </div>
+            </a>
+        </div>
+        <div class="ag-courses_item">
+            <a href="{% url 'billing_dashboard' %}" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                    Pending Invoices
+                </div>
+                <div class="ag-courses-item_date-box">
+                    Count:
+                    <span class="ag-courses-item_date">
+                        {{ pending_invoices }}
+                    </span>
+                </div>
+            </a>
+        </div>
+        <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                    Today's Attendance
+                </div>
+                <div class="ag-courses-item_date-box">
+                    Count:
+                    <span class="ag-courses-item_date">
+                        {{ today_attendance }}
+                    </span>
+                </div>
+            </a>
+        </div>
+        <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                    Equipment Inventory
+                </div>
+                <div class="ag-courses-item_date-box">
+                    Items:
+                    <span class="ag-courses-item_date">
+                        {{ equipment_count }}
+                    </span>
+                </div>
+            </a>
+        </div>
+        <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+                <div class="ag-courses-item_title">
+                    Monthly Revenue
+                </div>
+                <div class="ag-courses-item_date-box">
+                    Amount:
+                    <span class="ag-courses-item_date">
+                        ${{ monthly_revenue }}
+                    </span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

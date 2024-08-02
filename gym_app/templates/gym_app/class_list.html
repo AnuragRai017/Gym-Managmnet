@@ -1,0 +1,57 @@
+{% extends "gym_app/base.html" %}
+
+{% block extra_css %}
+<style>
+    body {
+        margin: 0;
+        background: linear-gradient(45deg, #49a09d, #5f2c82);
+        font-family: sans-serif;
+        font-weight: 100;
+        min-height: 100vh;
+        color: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="table-container">
+    <h1 class="text-white mb-4">Class Schedule</h1>
+    <table class="modern-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Instructor</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for class in classes %}
+            <tr>
+                <td>{{ class.name }}</td>
+                <td>{{ class.instructor }}</td>
+                <td>{{ class.start_time }}</td>
+                <td>{{ class.end_time }}</td>
+                <td>
+                    <a href="{% url 'class_detail' class.pk %}" class="btn btn-info">View</a>
+                    {% if user.is_staff %}
+                        <a href="{% url 'class_update' class.pk %}" class="btn btn-warning">Edit</a>
+                    {% endif %}
+                    <a href="{% url 'class_register' class.pk %}" class="btn btn-success">Register</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No classes found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if user.is_staff %}
+    <div class="mt-4">
+        <a href="{% url 'class_create' %}" class="btn btn-primary">Add New Class</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

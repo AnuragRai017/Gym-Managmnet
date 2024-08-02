@@ -1,0 +1,23 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h2>Attendance History</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Check-in Time</th>
+            <th>Check-out Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for attendance in attendances %}
+        <tr>
+            <td>{{ attendance.member.user.get_full_name }}</td>
+            <td>{{ attendance.check_in_time }}</td>
+            <td>{{ attendance.check_out_time|default_if_none:"Not checked out" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

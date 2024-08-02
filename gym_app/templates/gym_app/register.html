@@ -1,0 +1,29 @@
+{% extends "gym_app/base.html" %}
+
+{% block content %}
+<h2>Register</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.username.label_tag }} {{ form.username }}
+    {{ form.email.label_tag }} {{ form.email }}
+    {{ form.password1.label_tag }} {{ form.password1 }}
+    {{ form.password2.label_tag }} {{ form.password2 }}
+    {{ form.phone_number.label_tag }} {{ form.phone_number }}
+    {{ form.address.label_tag }} {{ form.address }}
+    
+    <fieldset>
+        <legend>{{ form.membership_plan.label }}</legend>
+        {% for radio in form.membership_plan %}
+            <div class="membership-option">
+                {{ radio.tag }}
+                <label for="{{ radio.id_for_label }}">
+                    {{ radio.choice_label }}
+                </label>
+            </div>
+        {% endfor %}
+    </fieldset>
+
+    <button type="submit">Register</button>
+</form>
+<p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+{% endblock %}
